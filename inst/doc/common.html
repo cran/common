@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>common</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">common</h1>
+
+
+
+<p>The <strong>common</strong> package is a lightweight package that
+contains solutions for commonly encountered problems when working in
+Base R.</p>
+<p>Here is a list of the functions and a short explanation of each:</p>
+<ul>
+<li><strong>v()</strong>: A generalized NSE quoting function.</li>
+<li><strong>sort.data.frame()</strong>: An overload to the sort function
+for data frames.</li>
+<li><strong>labels.data.frame()</strong>: An overload to the labels
+function for data frames.</li>
+<li><strong>%p%</strong>: An infix operator for the
+<code>paste0()</code> function.</li>
+<li><strong>%eq%</strong>: An enhanced equality operator.</li>
+<li><strong>Sys.path()</strong>: A function to return the path of the
+currently running program.</li>
+<li><strong>roundup()</strong>: A rounding function that matches SAS®
+rounding.</li>
+</ul>
+<div id="a-generalized-nse-quoting-function" class="section level3">
+<h3>A generalized NSE quoting function</h3>
+<p>Normally, when working in Base R, it is necessary to quote variable
+names when passing them into a function or operator. For example,
+observe the R subset brackets:</p>
+<pre><code># Variable names passed to subset are quoted
+dat &lt;- mtcars[1:10 , c(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)]
+
+# View results
+dat
+                   mpg cyl  disp
+Mazda RX4         21.0   6 160.0
+Mazda RX4 Wag     21.0   6 160.0
+Datsun 710        22.8   4 108.0
+Hornet 4 Drive    21.4   6 258.0
+Hornet Sportabout 18.7   8 360.0
+Valiant           18.1   6 225.0
+Duster 360        14.3   8 360.0
+Merc 240D         24.4   4 146.7
+Merc 230          22.8   4 140.8
+Merc 280          19.2   6 167.6</code></pre>
+<p>Some Base R functions and almost all <strong>tidyverse</strong>
+functions use Non-standard Evaluation (NSE) when passing variable names.
+This style of evaluation allows the user to type variables without using
+quotation marks or other methods of resolution.</p>
+<p>Picking up from the previous example, let’s now subset the
+<code>dat</code> data frame created above using the
+<code>subset()</code> function, which uses NSE:</p>
+<pre><code># No quotes on &quot;cyl&quot; using subset() function
+dt &lt;- subset(dat, cyl == 4)
+
+# View results
+dt
+#             mpg cyl  disp
+# Datsun 710 22.8   4 108.0
+# Merc 240D  24.4   4 146.7
+# Merc 230   22.8   4 140.8</code></pre>
+<p>The <code>v()</code> function in the <strong>common</strong> package
+is a quoting function. It allows you to use Non-Standard Evaluation
+(NSE) even on functions that were not specifically written for NSE.
+Observe:</p>
+<pre><code># Create a vector of unquoted names
+v1 &lt;- v(mpg, cyl, disp)
+
+# Result is a quoted vector
+v1
+# [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot;
+
+# Variable names not quoted
+dat2 &lt;- mtcars[1:10, v(mpg, cyl, disp)]
+
+# Works as expected
+dat2
+#                    mpg cyl  disp
+# Mazda RX4         21.0   6 160.0
+# Mazda RX4 Wag     21.0   6 160.0
+# Datsun 710        22.8   4 108.0
+# Hornet 4 Drive    21.4   6 258.0
+# Hornet Sportabout 18.7   8 360.0
+# Valiant           18.1   6 225.0
+# Duster 360        14.3   8 360.0
+# Merc 240D         24.4   4 146.7
+# Merc 230          22.8   4 140.8
+# Merc 280          19.2   6 167.6
+</code></pre>
+</div>
+<div id="sort-a-data-frame" class="section level3">
+<h3>Sort a data frame</h3>
+<p>Base R provides sort and order functions that work adequately on
+vectors. For data frames, the options are more limited. In particular,
+if you want to sort a data frame by multiple columns, there are no
+functions in Base R to do it. The R documentation makes the following
+suggestion:</p>
+<pre><code># Prepare data
+dat &lt;- mtcars[1:10, 1:3]
+
+# Get sort order
+ord &lt;- do.call(&#39;order&#39;, dat[ ,c(&quot;cyl&quot;, &quot;mpg&quot;)])
+
+# Sort data
+dat[ord, ]
+#                    mpg cyl  disp
+# Datsun 710        22.8   4 108.0
+# Merc 230          22.8   4 140.8
+# Merc 240D         24.4   4 146.7
+# Valiant           18.1   6 225.0
+# Merc 280          19.2   6 167.6
+# Mazda RX4         21.0   6 160.0
+# Mazda RX4 Wag     21.0   6 160.0
+# Hornet 4 Drive    21.4   6 258.0
+# Duster 360        14.3   8 360.0
+# Hornet Sportabout 18.7   8 360.0</code></pre>
+<p>In the above example, notice that a) there is no actual sorting
+function for data frames, and b) the method illustrated above provides
+no way to control the sort order of the variables involved. They are all
+sorted ascending.</p>
+<p>The <code>sort.data.frame()</code> function is an overload to the
+generic <code>sort()</code> function that is tailored for data frames.
+It allows you to sort by multiple columns, and control the sort
+direction for each sort variable. Here is an example:</p>
+<pre><code># Sort by cyl then mpg
+dat1 &lt;- sort(dat, by = c(&quot;cyl&quot;, &quot;mpg&quot;))
+dat1
+#                    mpg cyl  disp
+# Datsun 710        22.8   4 108.0
+# Merc 230          22.8   4 140.8
+# Merc 240D         24.4   4 146.7
+# Valiant           18.1   6 225.0
+# Merc 280          19.2   6 167.6
+# Mazda RX4         21.0   6 160.0
+# Mazda RX4 Wag     21.0   6 160.0
+# Hornet 4 Drive    21.4   6 258.0
+# Duster 360        14.3   8 360.0
+# Hornet Sportabout 18.7   8 360.0
+
+# Sort by cyl descending then mpg ascending
+dat2 &lt;- sort(dat, by = c(&quot;cyl&quot;, &quot;mpg&quot;),
+             ascending = c(FALSE, TRUE))
+dat2
+#                    mpg cyl  disp
+# Duster 360        14.3   8 360.0
+# Hornet Sportabout 18.7   8 360.0
+# Valiant           18.1   6 225.0
+# Merc 280          19.2   6 167.6
+# Mazda RX4         21.0   6 160.0
+# Mazda RX4 Wag     21.0   6 160.0
+# Hornet 4 Drive    21.4   6 258.0
+# Datsun 710        22.8   4 108.0
+# Merc 230          22.8   4 140.8
+# Merc 240D         24.4   4 146.7
+</code></pre>
+<p>The <code>sort.data.frame()</code> function also allows you to
+control whether NA values are sorted to the top or bottom. See the
+documentation for further information and more examples.</p>
+</div>
+<div id="modify-labels-on-a-data-frame" class="section level3">
+<h3>Modify labels on a data frame</h3>
+<p>While many data operations in R do not require control over the
+labels on a data frame, some types of programming do. Particularly in
+situations where you are sharing data between multiple people and
+groups, the column labels can provide valuable information about the
+data contained in a particular column.</p>
+<p>Unfortunately, Base R does not supply an easy way to manipulate these
+labels. The only approach is to use the <code>attr()</code> function to
+set the labels individually for each column. Like this:</p>
+<pre><code># Prepare data
+dat &lt;- mtcars[1:10, 1:3]
+
+# Assign labels
+attr(dat$mpg, &quot;label&quot;) &lt;- &quot;Miles Per Gallon&quot;
+attr(dat$cyl, &quot;label&quot;) &lt;- &quot;Cylinders&quot;
+attr(dat$disp, &quot;label&quot;) &lt;- &quot;Displacement&quot;
+</code></pre>
+<p>The <code>labels.data.frame()</code> function is an overload to the
+Base R <code>labels()</code> function that is specific to data frames.
+The function allows you to set labels for an entire data frame using a
+named list. Here is an example:</p>
+<pre><code># Prepare data
+dat &lt;- mtcars[1:10, 1:3]
+
+# Assign labels
+labels(dat) &lt;- list(mpg = &quot;Miles Per Gallon&quot;,
+                    cyl = &quot;Cylinders&quot;,
+                    disp = &quot;Displacement&quot;)
+                    
+# View label attributes
+labels(dat)
+# $mpg
+# [1] &quot;Miles Per Gallon&quot;
+# 
+# $cyl
+# [1] &quot;Cylinders&quot;
+# 
+# $disp
+# [1] &quot;Displacement&quot;</code></pre>
+<p>This function makes it much easier to set and retrieve labels on a
+data frame. The labels make it easier for users to understand the data.
+This function should be included in Base R, but for some reason is
+not.</p>
+</div>
+<div id="an-infix-concatenation-operator" class="section level3">
+<h3>An infix concatenation operator</h3>
+<p>Most programming languages provide a built-in concatenation operator.
+R does not. Instead, it provides the <code>paste()</code> and
+<code>paste0()</code> functions. While these functions do perform
+concatenation adequately, it is sometimes more convenient to have an
+operator.</p>
+<p>The <code>%p%</code> operator is an infix version of the
+<code>paste0()</code> function. It provides the same functionality of
+<code>paste0()</code>, but in a more compact manner. Like so:</p>
+<pre><code># Concatenation using paste0() function
+print(paste0(&quot;There are &quot;, nrow(mtcars), &quot; rows in the mtcars data frame&quot;))
+# [1] &quot;There are 32 rows in the mtcars data frame&quot;
+
+# Concatenation using %p% operator
+print(&quot;There are &quot; %p% nrow(mtcars) %p% &quot; rows in the mtcars data frame&quot;)
+# [1] &quot;There are 32 rows in the mtcars data frame&quot;
+</code></pre>
+</div>
+<div id="an-enhanced-equality-operator" class="section level3">
+<h3>An enhanced equality operator</h3>
+<p>The <strong>common</strong> package contains an enhanced equality
+operator. The objective of the <code>%eq%</code> operator is to return a
+TRUE or FALSE value when any two objects are compared. This enhanced
+equality operator is useful for situations when you don’t want to check
+for NULL or NA values, or care about the data types of the objects you
+are comparing.</p>
+<p>The <code>%eq%</code> operator also compares data frames. The
+comparison will include all data values, but no attributes. This
+functionality is particularly useful when comparing tibbles, as tibbles
+often have many attributes assigned by <code>dplyr</code> functions.</p>
+<p>Below is an example of several comparisons using the
+<code>%eq%</code> infix operator:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing of NULLs and NA</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cn">NULL</span> <span class="sc">%eq%</span> <span class="cn">NULL</span>        <span class="co"># TRUE</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cn">NULL</span> <span class="sc">%eq%</span> <span class="cn">NA</span>          <span class="co"># FALSE</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">%eq%</span> <span class="cn">NA</span>            <span class="co"># TRUE</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">%eq%</span> <span class="cn">NULL</span>           <span class="co"># FALSE</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">%eq%</span> <span class="cn">NA</span>             <span class="co"># FALSE</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing of atomic values</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">%eq%</span> <span class="dv">1</span>              <span class="co"># TRUE</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;one&quot;</span> <span class="sc">%eq%</span> <span class="st">&quot;one&quot;</span>      <span class="co"># TRUE</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">%eq%</span> <span class="st">&quot;one&quot;</span>          <span class="co"># FALSE</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">%eq%</span> <span class="fu">Sys.Date</span>()     <span class="co"># FALSE</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing of vectors</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>v1 <span class="sc">%eq%</span> v1            <span class="co"># TRUE</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>v1 <span class="sc">%eq%</span> v2            <span class="co"># FALSE</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing of data frames</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%eq%</span> mtcars    <span class="co"># TRUE</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%eq%</span> iris      <span class="co"># FALSE</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%eq%</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>,] <span class="co"># FALSE</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Mixing it up </span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%eq%</span> <span class="cn">NULL</span>      <span class="co"># FALSE</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>v1 <span class="sc">%eq%</span> <span class="cn">NA</span>            <span class="co"># FALSE</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">%eq%</span> v1             <span class="co"># FALSE</span></span></code></pre></div>
+<p>While it can be advantageous to have a comparison operator that does
+not give errors when encountering a NULL or NA value, note that this
+behavior can also mask problems with your code. Therefore, use the
+<code>%eq%</code> operator with care.</p>
+</div>
+<div id="getting-the-current-path" class="section level3">
+<h3>Getting the current path</h3>
+<p>Most programming languages provide a simple way to get the path of
+the currently running program. This basic feature has been left out of
+R. The <code>Sys.path()</code> function aims to make up for the
+oversight.</p>
+<pre><code># Get current path
+pth &lt;- Sys.path()
+
+# View path
+pth
+# [1] &quot;C:/packages/common/vignettes/common.Rmd&quot;</code></pre>
+<p>Note that this function returns the full path of the currently
+running program, including the file name and extension. This
+functionality is different from <code>getwd()</code>, which returns only
+the current working directory.</p>
+<p>Credit for this function goes to Andrew Simmons and the
+<strong>this.path</strong> package. The <strong>this.path</strong>
+functionality is renamed and provided here out of convenience.</p>
+</div>
+<div id="an-alternate-rounding-function" class="section level3">
+<h3>An alternate rounding function</h3>
+<p>As everyone knows, the R <code>round()</code> function rounds to the
+nearest even. For example:</p>
+<pre><code># Prepare sample vector 
+v1 &lt;- seq(0.5,9.5,by=1)
+v1
+# [1] 0.5 1.5 2.5 3.5 4.5 5.5 6.5 7.5 8.5 9.5
+
+# Base R round function
+r1 &lt;- round(v1)
+
+# Rounds to nearest even
+r1
+# [1]  0  2  2  4  4  6  6  8  8 10
+</code></pre>
+<p>However, humans and other software systems usually round 5 up. The
+reasons for R rounding the way it does are valid. Yet this difference in
+the way R rounds sometimes makes it difficult to compare R results to
+results from other software systems, particularly SAS®. It would be
+convenient if there were another rounding function that could be used
+when trying to compare R results to SAS®.</p>
+<p>That is the purpose of the <code>roundup()</code> function. Observe
+the differences in output to what was shown above:</p>
+<pre><code># Round up function
+r2 &lt;- roundup(v1)
+
+# Rounds 5 up
+r2
+# [1]  1  2  3  4  5  6  7  8  9 10
+</code></pre>
+<p>Note that the function behaves differently when rounding negative
+values.</p>
+<pre><code># Negate original vector
+v2 &lt;- -v1
+v2
+# [1] -0.5 -1.5 -2.5 -3.5 -4.5 -5.5 -6.5 -7.5 -8.5 -9.5
+
+# Rounding negative values
+r3 &lt;- roundup(v2)
+
+# Rounds away from zero
+r3
+# [1]  -1  -2  -3  -4  -5  -6  -7  -8  -9 -10</code></pre>
+<p>As you can see, when dealing with negative numbers, the
+<code>roundup()</code> function actually rounds down. “Round away from
+zero” is the best description of this function. The rounding logic of
+the <code>roundup()</code> function matches SAS® software, and can be
+used when comparing output between the two systems.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
