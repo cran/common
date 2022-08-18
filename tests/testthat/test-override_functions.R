@@ -12,7 +12,7 @@ prt <- read.table(header = TRUE, text = '
 
 
 
-test_that("common1: sort.data.frame works as expected.", {
+test_that("override1: sort.data.frame() works as expected.", {
 
 
   # Sample data frame to sort
@@ -111,66 +111,8 @@ test_that("common1: sort.data.frame works as expected.", {
 })
 
 
-test_that("common2: v() function works", {
 
-  res <- v(a, b, c)
-
-
-  expect_equal(res, c("a", "b", "c"))
-
-  res1 <- v(a, b, c * d)
-
-  res
-
-  expect_equal(res1, c("a", "b", "c * d"))
-
-})
-
-test_that("common3: roundup() function works as expected.", {
-
-  x <- seq(0.5,9.5,by=1)
-
-  res <- roundup(x, 0)
-
-  res
-
-
-
-  expect_equal(res, c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
-
-
-  vct0 <- c(-2.5, -1.5, -.5, 1.5, 2.5)
-  vct1 <- c(8.75, 8.85, 8.95, 9.05, 9.15, 9.25)
-
-  res0 <- roundup(vct0)
-
-  sasres0 <- c(-3, -2, -1, 2,3)
-  expect_equal(all(res0 == sasres0), TRUE)
-
-  rres0 <- round(vct0)
-  expect_equal(all(res0 == rres0), FALSE)
-
-  res1 <- roundup(vct1, 1)
-
-  sasres1 <- c(8.8, 8.9, 9.0, 9.1, 9.2, 9.3)
-  expect_equal(all(res1 == sasres1), TRUE)
-
-  rres1 <- round(vct1)
-  expect_equal(all(res1 == rres1), FALSE)
-
-  vct3 <- c(-2.5, -1.5, NA, 1.5, 2.5)
-  rres2 <- roundup(vct3)
-
-  expect_equal(is.na(rres2[3]), TRUE)
-  expect_equal(rres2[4], 2)
-
-  expect_error(roundup("1"))
-  expect_error(roundup(NULL))
-})
-
-
-
-test_that("common4: labels() function works as expected.", {
+test_that("override2: labels() function works as expected.", {
 
   # Basic functioning
   df1 <- mtcars[1:10, c("mpg", "cyl") ]
@@ -212,80 +154,24 @@ test_that("common4: labels() function works as expected.", {
 })
 
 
+test_that("override3: Sort retains df attributes", {
+
+  # Sample data frame to sort
+  dt <- mtcars[1:10, 1:3]
+  dt
+
+  labels(dt) <- list(mpg = "Miles Per Gallon",
+                     cyl = "Cylinders",
+                     disp = "Displacement")
 
 
+  # Sorts all columns
+  dt1 <- sort.data.frame(dt, by = c("cyl"))
+  dt1
 
+  res <- labels(dt1)
 
-test_that("common5: eq function works as expected.", {
+  res
 
-  expect_equal(mtcars %eq% mtcars, TRUE)
-  expect_equal(mtcars %eq% iris, FALSE)
-  expect_equal(mtcars %eq% mtcars[1:10, ], FALSE)
-  expect_equal(mtcars %eq% mtcars[, 1:5], FALSE)
-  d1 <- mtcars
-  d1[1, 1] <- 2
-  expect_equal(mtcars  %eq%  d1, FALSE)
-
-  v1 <- mtcars[[1]]
-  v2 <- mtcars[[1]]
-
-  expect_equal(v1 %eq% v2, TRUE)
-  expect_equal(v1 %eq% mtcars[[2]], FALSE)
-  expect_equal(v1 %eq% v2[1:5], FALSE)
-  v2[5] <-2
-  expect_equal(v1  %eq% v2, FALSE)
-
-  v1 <- c(1, 2, NA, NA)
-  v2 <- c(NA, NA, 1, NA, 3)
-  expect_equal(v1 %eq% v2, FALSE)
-
+  expect_equal(length(res), 3)
 })
-
-test_that("common6: strong_eq function works as expected.", {
-
-  v1 <- c(1, 2, 3, 4)
-  v2 <- c(1, 2, 3, 4)
-  expect_equal(all(strong_eq(v1, v2)), TRUE)
-
-  v1 <- c(1, 2, 2, 4)
-  v2 <- c(1, 2, 3, 4)
-  expect_equal(all(strong_eq(v1, v2)), FALSE)
-
-  v1 <- c(1, NA, 3, 4)
-  v2 <- c(1, 2, 3, 4)
-  expect_equal(all(strong_eq(v1, v2)), FALSE)
-
-  v1 <- c(NA, NA, NA, NA)
-  v2 <- c(NA, NA, NA, NA)
-  expect_equal(all(strong_eq(v1, v2)), TRUE)
-
-  v1 <- c(NA, NA, NA, NA)
-  v2 <- c(NA, NA, 1, NA)
-  expect_equal(all(strong_eq(v1, v2)), FALSE)
-
-
-})
-
-
-test_that("common7: equality operators are working as expected.", {
-
-
-  expect_equal(NULL %eq% NULL, TRUE)
-  expect_equal(NULL %eq% "fork", FALSE)
-  expect_equal(1 %eq% "fork", FALSE)
-
-
-  expect_equal(data.frame(A = 1,
-                          stringsAsFactors = FALSE) %eq% data.frame(B = 1,
-                                        stringsAsFactors = FALSE), FALSE)
-
-  expect_equal(strong_eq(1 , "fork"), FALSE)
-
-
-})
-
-
-
-
-
-

@@ -339,40 +339,54 @@ contains solutions for commonly encountered problems when working in
 Base R.</p>
 <p>Here is a list of the functions and a short explanation of each:</p>
 <ul>
-<li><strong>v()</strong>: A generalized NSE quoting function.</li>
-<li><strong>sort.data.frame()</strong>: An overload to the sort function
-for data frames.</li>
-<li><strong>labels.data.frame()</strong>: An overload to the labels
-function for data frames.</li>
-<li><strong>%p%</strong>: An infix operator for the
+<li><a href="#v"><strong>v()</strong></a>: A generalized NSE quoting
+function.</li>
+<li><a href="#sort"><strong>sort.data.frame()</strong></a>: An overload
+to the sort function for data frames.</li>
+<li><a href="#labels"><strong>labels.data.frame()</strong></a>: An
+overload to the labels function for data frames.</li>
+<li><a href="#p"><strong>%p%</strong></a>: An infix operator for the
 <code>paste0()</code> function.</li>
-<li><strong>%eq%</strong>: An enhanced equality operator.</li>
-<li><strong>Sys.path()</strong>: A function to return the path of the
-currently running program.</li>
-<li><strong>roundup()</strong>: A rounding function that matches SAS®
-rounding.</li>
+<li><a href="#eq"><strong>%eq%</strong></a>: An enhanced equality
+operator.</li>
+<li><a href="#path"><strong>Sys.path()</strong></a>: A function to
+return the path of the currently running program.</li>
+<li><a href="#roundup"><strong>roundup()</strong></a>: A rounding
+function that matches SAS® rounding.</li>
+<li><a href="#find"><strong>file.find()</strong></a>: A function to
+search for a file on the file system.</li>
+<li><a href="#find"><strong>dir.find()</strong></a>: A function to
+search for a directory on the file system.</li>
+<li><a href="#names"><strong>find.names()</strong></a>: A function to
+search for variable names on a data.frame.</li>
+<li><a href="#attr"><strong>copy.attributes()</strong></a>: A function
+to copy column attributes from one data frame to another.</li>
+<li><a href="#supsc"><strong>supsc()</strong></a>: A function to get
+UTF-8 superscript characters.</li>
+<li><a href="#supsc"><strong>subsc()</strong></a>: A function to get
+UTF-8 subscript characters.</li>
 </ul>
-<div id="a-generalized-nse-quoting-function" class="section level3">
+<div id="v" class="section level3">
 <h3>A generalized NSE quoting function</h3>
 <p>Normally, when working in Base R, it is necessary to quote variable
 names when passing them into a function or operator. For example,
 observe the R subset brackets:</p>
-<pre><code># Variable names passed to subset are quoted
-dat &lt;- mtcars[1:10 , c(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)]
-
-# View results
-dat
-                   mpg cyl  disp
-Mazda RX4         21.0   6 160.0
-Mazda RX4 Wag     21.0   6 160.0
-Datsun 710        22.8   4 108.0
-Hornet 4 Drive    21.4   6 258.0
-Hornet Sportabout 18.7   8 360.0
-Valiant           18.1   6 225.0
-Duster 360        14.3   8 360.0
-Merc 240D         24.4   4 146.7
-Merc 230          22.8   4 140.8
-Merc 280          19.2   6 167.6</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable names passed to subset are quoted</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> , <span class="fu">c</span>(<span class="st">&quot;mpg&quot;</span>, <span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;disp&quot;</span>)]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dat</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                   mpg cyl  disp</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Mazda RX4         <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Mazda RX4 Wag     <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Datsun <span class="dv">710</span>        <span class="fl">22.8</span>   <span class="dv">4</span> <span class="fl">108.0</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Hornet <span class="dv">4</span> Drive    <span class="fl">21.4</span>   <span class="dv">6</span> <span class="fl">258.0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Hornet Sportabout <span class="fl">18.7</span>   <span class="dv">8</span> <span class="fl">360.0</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Valiant           <span class="fl">18.1</span>   <span class="dv">6</span> <span class="fl">225.0</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Duster <span class="dv">360</span>        <span class="fl">14.3</span>   <span class="dv">8</span> <span class="fl">360.0</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Merc 240D         <span class="fl">24.4</span>   <span class="dv">4</span> <span class="fl">146.7</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Merc <span class="dv">230</span>          <span class="fl">22.8</span>   <span class="dv">4</span> <span class="fl">140.8</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Merc <span class="dv">280</span>          <span class="fl">19.2</span>   <span class="dv">6</span> <span class="fl">167.6</span></span></code></pre></div>
 <p>Some Base R functions and almost all <strong>tidyverse</strong>
 functions use Non-standard Evaluation (NSE) when passing variable names.
 This style of evaluation allows the user to type variables without using
@@ -380,70 +394,70 @@ quotation marks or other methods of resolution.</p>
 <p>Picking up from the previous example, let’s now subset the
 <code>dat</code> data frame created above using the
 <code>subset()</code> function, which uses NSE:</p>
-<pre><code># No quotes on &quot;cyl&quot; using subset() function
-dt &lt;- subset(dat, cyl == 4)
-
-# View results
-dt
-#             mpg cyl  disp
-# Datsun 710 22.8   4 108.0
-# Merc 240D  24.4   4 146.7
-# Merc 230   22.8   4 140.8</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No quotes on &quot;cyl&quot; using subset() function</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, cyl <span class="sc">==</span> <span class="dv">4</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>dt</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#             mpg cyl  disp</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Datsun 710 22.8   4 108.0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 240D  24.4   4 146.7</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 230   22.8   4 140.8</span></span></code></pre></div>
 <p>The <code>v()</code> function in the <strong>common</strong> package
 is a quoting function. It allows you to use Non-Standard Evaluation
 (NSE) even on functions that were not specifically written for NSE.
 Observe:</p>
-<pre><code># Create a vector of unquoted names
-v1 &lt;- v(mpg, cyl, disp)
-
-# Result is a quoted vector
-v1
-# [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot;
-
-# Variable names not quoted
-dat2 &lt;- mtcars[1:10, v(mpg, cyl, disp)]
-
-# Works as expected
-dat2
-#                    mpg cyl  disp
-# Mazda RX4         21.0   6 160.0
-# Mazda RX4 Wag     21.0   6 160.0
-# Datsun 710        22.8   4 108.0
-# Hornet 4 Drive    21.4   6 258.0
-# Hornet Sportabout 18.7   8 360.0
-# Valiant           18.1   6 225.0
-# Duster 360        14.3   8 360.0
-# Merc 240D         24.4   4 146.7
-# Merc 230          22.8   4 140.8
-# Merc 280          19.2   6 167.6
-</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a vector of unquoted names</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">v</span>(mpg, cyl, disp)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Result is a quoted vector</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>v1</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable names not quoted</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">v</span>(mpg, cyl, disp)]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Works as expected</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>dat2</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#                    mpg cyl  disp</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Mazda RX4         21.0   6 160.0</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Mazda RX4 Wag     21.0   6 160.0</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Datsun 710        22.8   4 108.0</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Hornet 4 Drive    21.4   6 258.0</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Hornet Sportabout 18.7   8 360.0</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Valiant           18.1   6 225.0</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Duster 360        14.3   8 360.0</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 240D         24.4   4 146.7</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 230          22.8   4 140.8</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 280          19.2   6 167.6</span></span></code></pre></div>
+<p><a href="#top">top</a></p>
 </div>
-<div id="sort-a-data-frame" class="section level3">
+<div id="sort" class="section level3">
 <h3>Sort a data frame</h3>
 <p>Base R provides sort and order functions that work adequately on
 vectors. For data frames, the options are more limited. In particular,
 if you want to sort a data frame by multiple columns, there are no
 functions in Base R to do it. The R documentation makes the following
 suggestion:</p>
-<pre><code># Prepare data
-dat &lt;- mtcars[1:10, 1:3]
-
-# Get sort order
-ord &lt;- do.call(&#39;order&#39;, dat[ ,c(&quot;cyl&quot;, &quot;mpg&quot;)])
-
-# Sort data
-dat[ord, ]
-#                    mpg cyl  disp
-# Datsun 710        22.8   4 108.0
-# Merc 230          22.8   4 140.8
-# Merc 240D         24.4   4 146.7
-# Valiant           18.1   6 225.0
-# Merc 280          19.2   6 167.6
-# Mazda RX4         21.0   6 160.0
-# Mazda RX4 Wag     21.0   6 160.0
-# Hornet 4 Drive    21.4   6 258.0
-# Duster 360        14.3   8 360.0
-# Hornet Sportabout 18.7   8 360.0</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get sort order</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">&#39;order&#39;</span>, dat[ ,<span class="fu">c</span>(<span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;mpg&quot;</span>)])</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort data</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>dat[ord, ]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#                    mpg cyl  disp</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Datsun 710        22.8   4 108.0</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 230          22.8   4 140.8</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 240D         24.4   4 146.7</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Valiant           18.1   6 225.0</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 280          19.2   6 167.6</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Mazda RX4         21.0   6 160.0</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Mazda RX4 Wag     21.0   6 160.0</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Hornet 4 Drive    21.4   6 258.0</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Duster 360        14.3   8 360.0</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Hornet Sportabout 18.7   8 360.0</span></span></code></pre></div>
 <p>In the above example, notice that a) there is no actual sorting
 function for data frames, and b) the method illustrated above provides
 no way to control the sort order of the variables involved. They are all
@@ -452,42 +466,42 @@ sorted ascending.</p>
 generic <code>sort()</code> function that is tailored for data frames.
 It allows you to sort by multiple columns, and control the sort
 direction for each sort variable. Here is an example:</p>
-<pre><code># Sort by cyl then mpg
-dat1 &lt;- sort(dat, by = c(&quot;cyl&quot;, &quot;mpg&quot;))
-dat1
-#                    mpg cyl  disp
-# Datsun 710        22.8   4 108.0
-# Merc 230          22.8   4 140.8
-# Merc 240D         24.4   4 146.7
-# Valiant           18.1   6 225.0
-# Merc 280          19.2   6 167.6
-# Mazda RX4         21.0   6 160.0
-# Mazda RX4 Wag     21.0   6 160.0
-# Hornet 4 Drive    21.4   6 258.0
-# Duster 360        14.3   8 360.0
-# Hornet Sportabout 18.7   8 360.0
-
-# Sort by cyl descending then mpg ascending
-dat2 &lt;- sort(dat, by = c(&quot;cyl&quot;, &quot;mpg&quot;),
-             ascending = c(FALSE, TRUE))
-dat2
-#                    mpg cyl  disp
-# Duster 360        14.3   8 360.0
-# Hornet Sportabout 18.7   8 360.0
-# Valiant           18.1   6 225.0
-# Merc 280          19.2   6 167.6
-# Mazda RX4         21.0   6 160.0
-# Mazda RX4 Wag     21.0   6 160.0
-# Hornet 4 Drive    21.4   6 258.0
-# Datsun 710        22.8   4 108.0
-# Merc 230          22.8   4 140.8
-# Merc 240D         24.4   4 146.7
-</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by cyl then mpg</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">sort</span>(dat, <span class="at">by =</span> <span class="fu">v</span>(cyl, mpg))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>dat1</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                    mpg cyl  disp</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Datsun 710        22.8   4 108.0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 230          22.8   4 140.8</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 240D         24.4   4 146.7</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Valiant           18.1   6 225.0</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 280          19.2   6 167.6</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Mazda RX4         21.0   6 160.0</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Mazda RX4 Wag     21.0   6 160.0</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Hornet 4 Drive    21.4   6 258.0</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Duster 360        14.3   8 360.0</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Hornet Sportabout 18.7   8 360.0</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by cyl descending then mpg ascending</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">sort</span>(dat, <span class="at">by =</span> <span class="fu">v</span>(cyl, mpg),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">ascending =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>dat2</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#                    mpg cyl  disp</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Duster 360        14.3   8 360.0</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Hornet Sportabout 18.7   8 360.0</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Valiant           18.1   6 225.0</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 280          19.2   6 167.6</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Mazda RX4         21.0   6 160.0</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Mazda RX4 Wag     21.0   6 160.0</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Hornet 4 Drive    21.4   6 258.0</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Datsun 710        22.8   4 108.0</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 230          22.8   4 140.8</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Merc 240D         24.4   4 146.7</span></span></code></pre></div>
 <p>The <code>sort.data.frame()</code> function also allows you to
 control whether NA values are sorted to the top or bottom. See the
-documentation for further information and more examples.</p>
+documentation for further information and more examples.<br />
+<a href="#top">top</a></p>
 </div>
-<div id="modify-labels-on-a-data-frame" class="section level3">
+<div id="labels" class="section level3">
 <h3>Modify labels on a data frame</h3>
 <p>While many data operations in R do not require control over the
 labels on a data frame, some types of programming do. Particularly in
@@ -497,42 +511,42 @@ data contained in a particular column.</p>
 <p>Unfortunately, Base R does not supply an easy way to manipulate these
 labels. The only approach is to use the <code>attr()</code> function to
 set the labels individually for each column. Like this:</p>
-<pre><code># Prepare data
-dat &lt;- mtcars[1:10, 1:3]
-
-# Assign labels
-attr(dat$mpg, &quot;label&quot;) &lt;- &quot;Miles Per Gallon&quot;
-attr(dat$cyl, &quot;label&quot;) &lt;- &quot;Cylinders&quot;
-attr(dat$disp, &quot;label&quot;) &lt;- &quot;Displacement&quot;
-</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign labels</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(dat<span class="sc">$</span>mpg, <span class="st">&quot;label&quot;</span>) <span class="ot">&lt;-</span> <span class="st">&quot;Miles Per Gallon&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(dat<span class="sc">$</span>cyl, <span class="st">&quot;label&quot;</span>) <span class="ot">&lt;-</span> <span class="st">&quot;Cylinders&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(dat<span class="sc">$</span>disp, <span class="st">&quot;label&quot;</span>) <span class="ot">&lt;-</span> <span class="st">&quot;Displacement&quot;</span></span></code></pre></div>
 <p>The <code>labels.data.frame()</code> function is an overload to the
 Base R <code>labels()</code> function that is specific to data frames.
 The function allows you to set labels for an entire data frame using a
 named list. Here is an example:</p>
-<pre><code># Prepare data
-dat &lt;- mtcars[1:10, 1:3]
-
-# Assign labels
-labels(dat) &lt;- list(mpg = &quot;Miles Per Gallon&quot;,
-                    cyl = &quot;Cylinders&quot;,
-                    disp = &quot;Displacement&quot;)
-                    
-# View label attributes
-labels(dat)
-# $mpg
-# [1] &quot;Miles Per Gallon&quot;
-# 
-# $cyl
-# [1] &quot;Cylinders&quot;
-# 
-# $disp
-# [1] &quot;Displacement&quot;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign labels</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">labels</span>(dat) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">mpg =</span> <span class="st">&quot;Miles Per Gallon&quot;</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cyl =</span> <span class="st">&quot;Cylinders&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">disp =</span> <span class="st">&quot;Displacement&quot;</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># View label attributes</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">labels</span>(dat)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># $mpg</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Miles Per Gallon&quot;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># $cyl</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Cylinders&quot;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># $disp</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Displacement&quot;</span></span></code></pre></div>
 <p>This function makes it much easier to set and retrieve labels on a
 data frame. The labels make it easier for users to understand the data.
 This function should be included in Base R, but for some reason is
-not.</p>
+not.<br />
+<a href="#top">top</a></p>
 </div>
-<div id="an-infix-concatenation-operator" class="section level3">
+<div id="p" class="section level3">
 <h3>An infix concatenation operator</h3>
 <p>Most programming languages provide a built-in concatenation operator.
 R does not. Instead, it provides the <code>paste()</code> and
@@ -542,16 +556,16 @@ operator.</p>
 <p>The <code>%p%</code> operator is an infix version of the
 <code>paste0()</code> function. It provides the same functionality of
 <code>paste0()</code>, but in a more compact manner. Like so:</p>
-<pre><code># Concatenation using paste0() function
-print(paste0(&quot;There are &quot;, nrow(mtcars), &quot; rows in the mtcars data frame&quot;))
-# [1] &quot;There are 32 rows in the mtcars data frame&quot;
-
-# Concatenation using %p% operator
-print(&quot;There are &quot; %p% nrow(mtcars) %p% &quot; rows in the mtcars data frame&quot;)
-# [1] &quot;There are 32 rows in the mtcars data frame&quot;
-</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenation using paste0() function</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;There are &quot;</span>, <span class="fu">nrow</span>(mtcars), <span class="st">&quot; rows in the mtcars data frame&quot;</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;There are 32 rows in the mtcars data frame&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenation using %p% operator</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;There are &quot;</span> <span class="sc">%p%</span> <span class="fu">nrow</span>(mtcars) <span class="sc">%p%</span> <span class="st">&quot; rows in the mtcars data frame&quot;</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;There are 32 rows in the mtcars data frame&quot;</span></span></code></pre></div>
+<p><a href="#top">top</a></p>
 </div>
-<div id="an-enhanced-equality-operator" class="section level3">
+<div id="eq" class="section level3">
 <h3>An enhanced equality operator</h3>
 <p>The <strong>common</strong> package contains an enhanced equality
 operator. The objective of the <code>%eq%</code> operator is to return a
@@ -597,44 +611,45 @@ often have many attributes assigned by <code>dplyr</code> functions.</p>
 <p>While it can be advantageous to have a comparison operator that does
 not give errors when encountering a NULL or NA value, note that this
 behavior can also mask problems with your code. Therefore, use the
-<code>%eq%</code> operator with care.</p>
+<code>%eq%</code> operator with care.<br />
+<a href="#top">top</a></p>
 </div>
-<div id="getting-the-current-path" class="section level3">
+<div id="path" class="section level3">
 <h3>Getting the current path</h3>
 <p>Most programming languages provide a simple way to get the path of
 the currently running program. This basic feature has been left out of
 R. The <code>Sys.path()</code> function aims to make up for the
 oversight.</p>
-<pre><code># Get current path
-pth &lt;- Sys.path()
-
-# View path
-pth
-# [1] &quot;C:/packages/common/vignettes/common.Rmd&quot;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get current path</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pth <span class="ot">&lt;-</span> <span class="fu">Sys.path</span>()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View path</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>pth</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;C:/packages/common/vignettes/common.Rmd&quot;</span></span></code></pre></div>
 <p>Note that this function returns the full path of the currently
 running program, including the file name and extension. This
 functionality is different from <code>getwd()</code>, which returns only
 the current working directory.</p>
 <p>Credit for this function goes to Andrew Simmons and the
 <strong>this.path</strong> package. The <strong>this.path</strong>
-functionality is renamed and provided here out of convenience.</p>
+functionality is renamed and provided here out of convenience.<br />
+<a href="#top">top</a></p>
 </div>
-<div id="an-alternate-rounding-function" class="section level3">
+<div id="roundup" class="section level3">
 <h3>An alternate rounding function</h3>
 <p>As everyone knows, the R <code>round()</code> function rounds to the
 nearest even. For example:</p>
-<pre><code># Prepare sample vector 
-v1 &lt;- seq(0.5,9.5,by=1)
-v1
-# [1] 0.5 1.5 2.5 3.5 4.5 5.5 6.5 7.5 8.5 9.5
-
-# Base R round function
-r1 &lt;- round(v1)
-
-# Rounds to nearest even
-r1
-# [1]  0  2  2  4  4  6  6  8  8 10
-</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare sample vector </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.5</span>,<span class="fl">9.5</span>,<span class="at">by=</span><span class="dv">1</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>v1</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 0.5 1.5 2.5 3.5 4.5 5.5 6.5 7.5 8.5 9.5</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Base R round function</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>r1 <span class="ot">&lt;-</span> <span class="fu">round</span>(v1)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Rounds to nearest even</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>r1</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># [1]  0  2  2  4  4  6  6  8  8 10</span></span></code></pre></div>
 <p>However, humans and other software systems usually round 5 up. The
 reasons for R rounding the way it does are valid. Yet this difference in
 the way R rounds sometimes makes it difficult to compare R results to
@@ -643,31 +658,154 @@ convenient if there were another rounding function that could be used
 when trying to compare R results to SAS®.</p>
 <p>That is the purpose of the <code>roundup()</code> function. Observe
 the differences in output to what was shown above:</p>
-<pre><code># Round up function
-r2 &lt;- roundup(v1)
-
-# Rounds 5 up
-r2
-# [1]  1  2  3  4  5  6  7  8  9 10
-</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Round up function</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fu">roundup</span>(v1)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rounds 5 up</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>r2</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># [1]  1  2  3  4  5  6  7  8  9 10</span></span></code></pre></div>
 <p>Note that the function behaves differently when rounding negative
 values.</p>
-<pre><code># Negate original vector
-v2 &lt;- -v1
-v2
-# [1] -0.5 -1.5 -2.5 -3.5 -4.5 -5.5 -6.5 -7.5 -8.5 -9.5
-
-# Rounding negative values
-r3 &lt;- roundup(v2)
-
-# Rounds away from zero
-r3
-# [1]  -1  -2  -3  -4  -5  -6  -7  -8  -9 -10</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Negate original vector</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="sc">-</span>v1</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>v2</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] -0.5 -1.5 -2.5 -3.5 -4.5 -5.5 -6.5 -7.5 -8.5 -9.5</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Rounding negative values</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>r3 <span class="ot">&lt;-</span> <span class="fu">roundup</span>(v2)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Rounds away from zero</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>r3</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># [1]  -1  -2  -3  -4  -5  -6  -7  -8  -9 -10</span></span></code></pre></div>
 <p>As you can see, when dealing with negative numbers, the
 <code>roundup()</code> function actually rounds down. “Round away from
 zero” is the best description of this function. The rounding logic of
 the <code>roundup()</code> function matches SAS® software, and can be
-used when comparing output between the two systems.</p>
+used when comparing output between the two systems.<br />
+<a href="#top">top</a></p>
+</div>
+<div id="find" class="section level3">
+<h3>File and Directory search</h3>
+<p>Sometimes you know the name of the file you are looking for, but do
+not know the exact location. It might be in the directory above your
+program, or it might be in the directory below. It could be one level
+up, or 3 levels up.</p>
+<p>The <code>file.find()</code> function provides an easy way to search
+for files you are looking for. You tell the function where to start
+searching from and what to look for, and it will begin looking in the
+base directory. Once the base directory is searched, it will expand the
+search above and below the base directory. The search routine will
+continue expanding the search until it hits the limits imposed by the
+<code>up</code> and <code>down</code> parameters. Here is an
+example:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look for a file named &quot;globals.R&quot;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pths <span class="ot">&lt;-</span> <span class="fu">file.find</span>(<span class="fu">getwd</span>(), <span class="st">&quot;globals.R&quot;</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>pths</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Look for Rdata files three levels up, and two levels down</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>pths <span class="ot">&lt;-</span> <span class="fu">file.find</span>(<span class="fu">getwd</span>(), <span class="st">&quot;*.Rdata&quot;</span>, <span class="at">up =</span> <span class="dv">3</span>, <span class="at">down =</span> <span class="dv">2</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>pths</span></code></pre></div>
+<p>The function will return a vector of full paths that meet the search
+criteria, and are within bounds of the search. If no file is found that
+meets the search criteria, the function returns a NULL.</p>
+<p>The <code>dir.find()</code> function works the same as
+<code>file.find()</code>, but for directories instead of files. Note
+that these two functions may be used together to perform complex
+searches. <a href="#top">top</a></p>
+</div>
+<div id="names" class="section level3">
+<h3>Finding variable names</h3>
+<p>Sometimes you have a data frame with many variables, and you need to
+perform an operation on only some of them. The <code>find.names()</code>
+function can help you subset these variable names. There are parameters
+to define the search criteria, provide exclusions, and a beginning and
+ending range to perform the search. Here are some simple examples:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View names</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dat)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot; &quot;carb&quot;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all names starting with &quot;c&quot;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">find.names</span>(dat, <span class="at">pattern =</span> <span class="st">&quot;c*&quot;</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;cyl&quot;  &quot;carb&quot;</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all names starting with &quot;c&quot; or &quot;d&quot;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">find.names</span>(dat, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">&quot;c*&quot;</span>, <span class="st">&quot;d*&quot;</span>))</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;cyl&quot;  &quot;carb&quot; &quot;disp&quot; &quot;drat&quot;</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Get names starting with &quot;c&quot; or &quot;d&quot; from column 4 on</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">find.names</span>(dat, <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">&quot;c*&quot;</span>, <span class="st">&quot;d*&quot;</span>), <span class="at">start =</span> <span class="dv">4</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;carb&quot; &quot;drat&quot;</span></span></code></pre></div>
+</div>
+<div id="attr" class="section level3">
+<h3>Copying attributes between data frames</h3>
+<p>Base R functions that work with data frames are annoying in that they
+often drop any attributes assigned to data frame columns. Observe:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare sample dataset</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> mtcars[ , <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign some labels </span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">labels</span>(dat) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">mpg =</span> <span class="st">&quot;Miles Per Gallon&quot;</span>, </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cyl =</span> <span class="st">&quot;Cylinders&quot;</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">disp =</span> <span class="st">&quot;Displacement&quot;</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># View labels</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">labels</span>(dat)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># $mpg</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Miles Per Gallon&quot;</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># $cyl</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Cylinders&quot;</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co"># $disp</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Displacement&quot;</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset the data</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, cyl <span class="sc">==</span> <span class="dv">4</span>)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels are gone!</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="fu">labels</span>(dat2)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co"># list()</span></span></code></pre></div>
+<p>To get the attributes back, one must copy the attributes from the
+original data frame to the subset data frame. That is what the
+<code>copy.attributes()</code> function does. Picking up from the
+example above, let’s now restore the attributes lost during the
+<code>subset()</code> operation:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restore attributes</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">copy.attributes</span>(dat, dat2)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels are back!</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">labels</span>(dat2)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># $mpg</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Miles Per Gallon&quot;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># $cyl</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Cylinders&quot;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># $disp</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;Displacement&quot;</span></span></code></pre></div>
+</div>
+<div id="supsc" class="section level3">
+<h3>Superscripts and Subscripts</h3>
+<p>There are many occasions when you need to create a superscript or
+subscript. The UTF-8 character set provides superscript and subscript
+versions of many commonly used characters. For example, the following
+code can be used to add a superscript ‘1’ to the front of a footnote
+string: <img src="data:image/png;base64,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" /></p>
+<p>Remembering these UTF-8 codes, however, can be a challenge for most
+people. The <code>supsc()</code> and <code>subsc()</code> functions look
+up the superscript or subscript version of a normal character, without
+having to remember or research the proper UTF-8 code.</p>
+<p>Using these functions, we can therefore rewrite the above example as
+follows: <img src="data:image/png;base64,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" /></p>
+<p>Here are a couple more examples:
+<img src="data:image/png;base64,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" /></p>
+<p>Note that using the <strong>glue</strong> package, you can embed
+these functions directly in your character strings:
+<img src="data:image/png;base64,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" /></p>
+<p><a href="#top">top</a></p>
 </div>
 
 
