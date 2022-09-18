@@ -145,11 +145,11 @@ knitr::opts_chunk$set(
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
 #  # Concatenation using paste0() function
-#  print(paste0("There are ", nrow(mtcars), " rows in the mtcars data frame"))
+#  paste0("There are ", nrow(mtcars), " rows in the mtcars data frame")
 #  # [1] "There are 32 rows in the mtcars data frame"
 #  
 #  # Concatenation using %p% operator
-#  print("There are " %p% nrow(mtcars) %p% " rows in the mtcars data frame")
+#  "There are " %p% nrow(mtcars) %p% " rows in the mtcars data frame"
 #  # [1] "There are 32 rows in the mtcars data frame"
 #  
 
@@ -301,4 +301,17 @@ knitr::opts_chunk$set(
 #  # $disp
 #  # [1] "Displacement"
 #  
+
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Separate two strings by 25 spaces
+#  str <- paste0("Left", paste0(rep(" ", 25), collapse = ""), "Right", collapse = "")
+#  str
+#  # [1] "Left                         Right"
+#  
+
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Separate two strings by 25 spaces
+#  str <- "Left" %p% spaces(25) %p% "Right"
+#  str
+#  # [1] "Left                         Right"
 

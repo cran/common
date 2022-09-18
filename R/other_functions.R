@@ -97,6 +97,13 @@ v <- function(...) {
   # Convert list to vector
   vars_c <- unlist(vars_c)
 
+  nms <- names(vars)
+  if (!is.null(nms) & length(nms) - 1 == length(vars_c)) {
+
+    # Add names if available
+    names(vars_c) <- names(vars)[seq(2, length(vars))]
+
+  }
 
   return(vars_c)
 
@@ -286,7 +293,6 @@ copy.attributes <- function(source, target) {
   }
 
 
-
   ret <- target
 
   for (nm in names(target)) {
@@ -296,8 +302,16 @@ copy.attributes <- function(source, target) {
 
       for (at in names(att)) {
 
-        attr(ret[[nm]], at) <- att[[at]]
+        # Don't break factors
+        if ("factor" %in% class(ret[[nm]]) & at == "levels") {
 
+          if (length(att[[at]]) ==  length(attr(ret[[nm]], at)))
+            attr(ret[[nm]], at) <- att[[at]]
+
+        } else {
+
+          attr(ret[[nm]], at) <- att[[at]]
+        }
       }
     }
   }
