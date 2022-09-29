@@ -1,6 +1,6 @@
-a4bfdf48e800be1fa751caf3cb5d8a50 *DESCRIPTION
+0e2937f854b4dd6a15c5c3f77e1f26d7 *DESCRIPTION
 75a1cf3b014c6627a7f40c131933e9f3 *NAMESPACE
-48559be56f9b03c4394f0a86ef80253a *NEWS.md
+8d33a8f0539c4d9744c3548983df754f *NEWS.md
 5a53beb2f21a91562b869848d22205ee *R/common.R
 1bcf900fdfa832bb9731350a0c03cd83 *R/file_functions.R
 7620b0e1fe80e026be68b3acc6ff1916 *R/operators.R
@@ -8,7 +8,7 @@ a4bfdf48e800be1fa751caf3cb5d8a50 *DESCRIPTION
 fbe860214a6863b988e5186d38bcdf93 *R/override_functions.R
 3ac54c62123a2d3f1c1345342e669dff *R/string_functions.R
 8854c0241a5010de3ccee49601bdc5e1 *R/subsc.R
-5c817d668723790a2b2fce701ca0a3d3 *R/supsc.R
+67acc9f34b9c586461b6f2e62fa864b5 *R/supsc.R
 07ab81d80b43e9d51e196ab55fccc7c5 *R/symbol.R
 feb27fef2f51343cd64dd06d13a05e33 *README.md
 319004b64a143c5351e1dd686ee9253e *build/vignette.rds
