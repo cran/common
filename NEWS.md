@@ -1,3 +1,11 @@
+# common 1.0.7
+
+* Changes to prevent breakage of this.path().
+
+# common 1.0.6
+
+* Allow `roundup()` to accept a data.frame and round all numeric columns.
+
 # common 1.0.5
 
 * CRAN fixes.

@@ -7,9 +7,6 @@
 #' @description A function that gets the full path of the currently running
 #' program.  If the function fails to retrieve the path for some reason,
 #' it will return a NULL.  The function takes no parameters.
-#'
-#' Credit for this function goes to Andrew Simmons and the
-#' \code{\link{this.path}} package.
 #' @returns The full path of the currently running program, or a NULL.
 #' @family fileops
 #' @examples
@@ -20,10 +17,7 @@
 #' @export
 Sys.path <- function() {
 
-  ppth <- NULL
-  tryCatch({
-    ppth <- this.path::this.path()
-  }, error = function(e) { ppth <- NULL})
+  ppth <- Sys.path.internal()
 
   return(ppth)
 

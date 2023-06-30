@@ -10,7 +10,8 @@
 #' @description A function that rounds positive numbers up when the last digit
 #' is a 5.  For negative numbers ending in 5, the function actually rounds down.
 #' "Round away from zero" is the most accurate description of this function.
-#' @param x A vector of values to round.
+#' @param x A vector of values to round.  Also accepts a data frame. In the
+#' case of a data frame, the function will round all numeric columns.
 #' @param digits A number of decimal places to round to. Default is zero.
 #' @returns The rounded data vector.
 #' @examples
@@ -29,9 +30,35 @@
 #' @export
 roundup <- function(x, digits = 0) {
 
-  if (!is.numeric(x)) {
-    stop("Input value must be numeric.")
+  if (any(class(x) %in% "data.frame")) {
+
+    ret <- x
+
+    for(i in seq_len(ncol(x))) {
+
+      if (is.numeric(ret[[i]]) & is.factor(ret[[i]]) == FALSE)
+        ret[[i]] <- rup(ret[[i]], digits)
+    }
+
+
+  } else {
+
+
+    if (!is.numeric(x)) {
+      stop("Input value must be numeric.")
+    }
+
+
+    ret <- rup(x, digits)
   }
+
+
+
+  return(ret)
+}
+
+
+rup <- function(x, digits = 0) {
 
   posneg = sign(x)
   z = abs(x)*10^digits
@@ -41,6 +68,7 @@ roundup <- function(x, digits = 0) {
   ret <- z*posneg
 
   return(ret)
+
 }
 
 
