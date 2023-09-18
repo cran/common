@@ -1,7 +1,7 @@
-bd851e48c8dd17de6b24db68120d9486 *DESCRIPTION
-75a1cf3b014c6627a7f40c131933e9f3 *NAMESPACE
-47ffa6b77955e46e22e46578a3192ef2 *NEWS.md
-59c437e6e8877c14d1d13a06f7e69d55 *R/common.R
+ed604368b3da4e244f0220dfe3cd3054 *DESCRIPTION
+5bac6a60634ddd3b3fe70cca1efd94e6 *NAMESPACE
+91e6035d07c1d03837e195bd0876ee2b *NEWS.md
+5f0a2206e077e87315687394aab1e80e *R/common.R
 7f30854ef148d95839c593f98ad20937 *R/file_functions.R
 7620b0e1fe80e026be68b3acc6ff1916 *R/operators.R
 a087c4fedc7fc50049868163176d0a73 *R/other_functions.R
@@ -9,7 +9,7 @@ fbe860214a6863b988e5186d38bcdf93 *R/override_functions.R
 3ac54c62123a2d3f1c1345342e669dff *R/string_functions.R
 8854c0241a5010de3ccee49601bdc5e1 *R/subsc.R
 67acc9f34b9c586461b6f2e62fa864b5 *R/supsc.R
-07ab81d80b43e9d51e196ab55fccc7c5 *R/symbol.R
+1d732bd7d5c966223d954e0d651dd1eb *R/symbol.R
 20a7e7c537f6d291ce9668ee9b61fc2e *R/syspath.R
 df7bb1a710182517fb985ec54d55d8a0 *README.md
 db9a6d069c80fe7f0c7f92292f6c4485 *build/vignette.rds
@@ -17,7 +17,7 @@ a4c8e74806f222aa7c93cb2819d90e6f *inst/doc/common.R
 6ca879bb48f518e25a782cf5752e6495 *inst/doc/common.Rmd
 73c77d6dc5a4547d763c158d84c14a23 *inst/doc/common.html
 bcffadce012c9ff7f270f3263ccaab93 *man/Sys.path.Rd
-8945543a90d844c0a815a56c49a72762 *man/common.Rd
+4504b670e8548785a92dca7f094b4534 *man/common.Rd
 8bb9a6ed844f9eb2095dd6527f4e1088 *man/copy.attributes.Rd
 4169441346b2e95d7104239ecf8eb005 *man/dir.find.Rd
 0bd233ba5f519ddde49f4c7febf98447 *man/file.find.Rd
@@ -40,7 +40,7 @@ edb9e342809cad0f0462a82c0a92f578 *man/images/sup1.png
 52f7cce3ffb7ad91602d88705a46dff9 *man/spaces.Rd
 c8b47c42f673ee453a1c1f2c21240490 *man/subsc.Rd
 7b1afcd80a9c592fe84704477880237a *man/supsc.Rd
-93e46580344888d6d3f81340d917b5b4 *man/symbol.Rd
+10c42482d0401ec25fa5828fce155909 *man/symbol.Rd
 94b310856dda130eb7f711d7a624850a *man/v.Rd
 be11afddfcfd0a5b157ad9f7934bde80 *tests/testthat.R
 9d70fc6905dc1ada66954b1a2c52bd22 *tests/testthat/test-file_functions.R
