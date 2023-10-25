@@ -1,7 +1,7 @@
 Package: common
 Type: Package
 Title: Solutions for Common Problems in Base R
-Version: 1.0.9
+Version: 1.1.0
 Authors@R: c(
     person(given = "David",
            family = "Bosak",
@@ -28,8 +28,8 @@ Config/testthat/edition: 3
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2023-09-18 03:35:10 UTC; dbosa
+Packaged: 2023-10-25 17:53:19 UTC; dbosa
 Author: David Bosak [aut, cre],
   Duong Tran [ctb]
 Repository: CRAN
-Date/Publication: 2023-09-18 04:20:02 UTC
+Date/Publication: 2023-10-25 19:40:08 UTC
