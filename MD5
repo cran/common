@@ -1,10 +1,10 @@
-4e81a5b23993454aebd40701935f68a4 *DESCRIPTION
+3e104b806bde757a2fa6a97ec5706008 *DESCRIPTION
 1202fdb4433f291a03e074272ab0d693 *NAMESPACE
-18080989429b2710fbb94c028a6bbdbb *NEWS.md
+04883cbddd825cb0153e14b0ad02e6ae *NEWS.md
 5f0a2206e077e87315687394aab1e80e *R/common.R
 7f30854ef148d95839c593f98ad20937 *R/file_functions.R
 7620b0e1fe80e026be68b3acc6ff1916 *R/operators.R
-6193dd5e540d0f994711dfe119492df7 *R/other_functions.R
+cb0373fad08ce2950622ce439775023a *R/other_functions.R
 fbe860214a6863b988e5186d38bcdf93 *R/override_functions.R
 3ac54c62123a2d3f1c1345342e669dff *R/string_functions.R
 8854c0241a5010de3ccee49601bdc5e1 *R/subsc.R
@@ -46,7 +46,7 @@ c8b47c42f673ee453a1c1f2c21240490 *man/subsc.Rd
 be11afddfcfd0a5b157ad9f7934bde80 *tests/testthat.R
 9d70fc6905dc1ada66954b1a2c52bd22 *tests/testthat/test-file_functions.R
 492a2766efc22a0b1c37d185c3d528b8 *tests/testthat/test-operators.R
-1b65f9e2000a13b4ffcd5eed5a8f2f02 *tests/testthat/test-other_functions.R
+0d826fc9a6b0b120717bfef12c1b6e38 *tests/testthat/test-other_functions.R
 2d6bcfb09320ae4e7b06645cc2080a6b *tests/testthat/test-override_functions.R
 2296b9f3ee052ce22d3565f14f2fb8b7 *tests/testthat/test-supsub.R
 813c4830aa9520136ec958c0dbfa199f *vignettes/common.Rmd
