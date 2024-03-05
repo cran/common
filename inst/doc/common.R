@@ -315,3 +315,87 @@ knitr::opts_chunk$set(
 #  str
 #  # [1] "Left                         Right"
 
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Create sample vector
+#  v1 <- c(1, 1, 1, 2, 2, 3, 3, 3, 1, 1)
+#  
+#  # Identify duplicated values
+#  res1 <- !duplicated(v1)
+#  
+#  # View duplicated results
+#  res1
+#  # [1] TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE
+#  
+
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Identify changed values
+#  res2 <- changed(v1)
+#  
+#  # View changed results
+#  res2
+#  # [1] TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE
+#  
+
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Create sample data frame
+#  v2 <- c("A", "A", "A", "A", "A", "A", "B", "B", "B", "B")
+#  dat <- data.frame(v1, v2)
+#  
+#  # View original data frame
+#  dat
+#  #    v1 v2
+#  # 1   1  A
+#  # 2   1  A
+#  # 3   1  A
+#  # 4   2  A
+#  # 5   2  A
+#  # 6   3  A
+#  # 7   3  B
+#  # 8   3  B
+#  # 9   1  B
+#  # 10  1  B
+#  
+#  # Get changed values for each column
+#  res3 <- changed(dat)
+#  
+#  # View results
+#  res3
+#  #    v1.changed v2.changed
+#  # 1        TRUE       TRUE
+#  # 2       FALSE      FALSE
+#  # 3       FALSE      FALSE
+#  # 4        TRUE      FALSE
+#  # 5       FALSE      FALSE
+#  # 6        TRUE      FALSE
+#  # 7       FALSE       TRUE
+#  # 8       FALSE      FALSE
+#  # 9        TRUE      FALSE
+#  # 10      FALSE      FALSE
+
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Get changed values for each column
+#  res4 <- changed(dat, simplify = TRUE)
+#  
+#  # View results
+#  res4
+#  # [1]  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE
+
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Find last items in each group
+#  res3 <- changed(dat, reverse = TRUE)
+#  
+#  # View results
+#  res3
+#  #    v1.changed v2.changed
+#  # 1       FALSE      FALSE
+#  # 2       FALSE      FALSE
+#  # 3        TRUE      FALSE
+#  # 4       FALSE      FALSE
+#  # 5        TRUE      FALSE
+#  # 6       FALSE       TRUE
+#  # 7       FALSE      FALSE
+#  # 8        TRUE      FALSE
+#  # 9       FALSE      FALSE
+#  # 10       TRUE       TRUE
+#  
+

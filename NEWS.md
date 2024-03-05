@@ -1,3 +1,8 @@
+# common 1.1.2
+
+* Added `source.all()` function.
+* Fix for data type on `subsc()` and `supsc()`.
+
 # common 1.1.1
 
 * Fixed bug in `changed()` function when there was only one value.
